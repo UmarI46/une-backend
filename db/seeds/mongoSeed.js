@@ -4,13 +4,12 @@ dotenv.config();
 
 const url= process.env.DB_LOCAL
 const local = mongoose.connect(url);
-const userSchema= new mongoose.Schema(
-  {username: String})
-const User=mongoose.model("User", userSchema)
-const seedUserData=[{username:"Jon"},{username:"Bogdan"},{username:"Umar"}]
 
-async function seedDB() {
-
+export async function seedDB() {
+  const userSchema= new mongoose.Schema(
+    {username: String})
+  const User=mongoose.model("User", userSchema)
+  const seedUserData=[{username:"Jon"},{username:"Bogdan"},{username:"Joe"}]
   try {
     await local 
     console.log("Connected correctly to server");
@@ -24,4 +23,4 @@ async function seedDB() {
     console.log("disconnected")
   }
 }
-seedDB();
+
