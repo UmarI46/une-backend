@@ -4,8 +4,9 @@ dotenv.config();
 
 const db = mongoose.connect;
 const url = process.env.DB_URL;
+const local = process.env.DB_LOCAL;
 
-db(url)
+db(local)
   .then(() => {
     console.log("connected");
   })
