@@ -1,0 +1,1 @@
+exports.gameData=require("./game.js")
