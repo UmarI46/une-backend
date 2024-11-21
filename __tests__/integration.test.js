@@ -1,38 +1,40 @@
 import mongoose from "mongoose";
 import dotenv from "dotenv";
-import request from "supertest";
-import app from "../app.js";
+import { Game } from "../db/data/testData/testSchema/gameSchema.js";
 import { seedDB } from "../db/seeds/mongoSeed.js";
-import { testData } from "../db/data/testData/game.js";
-import { Player, playerSchema } from "../db/data/testData/testSchema/playerTestSchema.js";
+// supertest?
 
 dotenv.config();
 
 beforeEach(() => {
-  return seedDB(testData, Player, playerSchema)
+  return seedDB();
 });
 afterAll(() => mongoose.connection.close());
 
 const local = process.env.DB_LOCAL;
 const db = mongoose.connect;
 
-
-//SET UP TESTING ===========================================================
-//==========================================================================
-//==========================================================================
-describe("tests connection to database", () => {
+describe("tests connection to database and seeding", () => {
   test("connects to database", () => {
     return db(local).then(() => {
-      console.log("connected");
-      const actualOutput= mongoose.connection.readyState
-      const expectedOutput= 1
+      const actualOutput = mongoose.connection.readyState;
+      const expectedOutput = 1;
       expect(actualOutput).toBe(expectedOutput);
     });
   });
-  test("players data is seeded",()=>{
-    return db(local).then(async() => {
-      const players=await Player.find()    
-      expect(players.length).toBeGreaterThan(0);
+  test("game data is seeded", () => {
+    return db(local).then(async () => {
+      const allGames = await Game.find();
+      const firstGame = await Game.findOne();
+      expect(allGames.length).toBeGreaterThan(0);
+      expect(firstGame).toMatchObject({
+        players: expect.any(Object),
+        currentTurn: expect.any(Number),
+        deck: expect.any(Object),
+        drawPile: expect.any(Object),
+        discardPile: expect.any(Object),
+        gameState: expect.any(Number),
+      });
     });
-  })
+  });
 });
