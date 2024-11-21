@@ -2,7 +2,7 @@ import {
   Game,
   gameSchema,
   createGame,
-} from "../db/data/testData/testSchema/gameSchema.js";
+} from "../db/data/testData/testSchema/testGameSchema.js";
 
 export async function newGame() {
   newGame = await createGame();
