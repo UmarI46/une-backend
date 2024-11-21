@@ -6,9 +6,6 @@ import { seedDB } from "../db/seeds/mongoSeed.js";
 import { testData } from "../db/data/testData/game.js";
 import { Player, playerSchema } from "../db/data/testData/testSchema/playerTestSchema.js";
 
-// import test data
-// import seed function
-
 dotenv.config();
 
 beforeEach(() => {
@@ -32,21 +29,10 @@ describe("tests connection to database", () => {
       expect(actualOutput).toBe(expectedOutput);
     });
   });
-  test("data is seeded",()=>{
+  test("players data is seeded",()=>{
     return db(local).then(async() => {
-      /* console.log(Object.keys(mongoose.connection.collections))
-      console.log(Object.keys(mongoose.connection.db))
-      console.log(Object.keys(mongoose.connection.db.client))
-      console.log(Object.keys(mongoose.connection.db.s)) */
-      /* console.log(Object.keys(mongoose.connection.collections))
-      console.log(Object.keys(mongoose.connection.collections.players)) */
-      const players=await Player.find()
-      console.log(players)
-      console.log(players.length)
-      /* const actualOutput= mongoose.connection.getCollectionNames().includes("players")
-      console.log(actualOutput) */
-      const expectedOutput= {"collection": "players", "db": "test"}
-      expect(actualOutput).toEqual(expectedOutput);
+      const players=await Player.find()    
+      expect(players.length).toBeGreaterThan(0);
     });
   })
 });
