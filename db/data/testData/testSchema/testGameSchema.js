@@ -10,11 +10,11 @@ export const gameSchema = new mongoose.Schema({
   gameState: { type: Number },
 });
 
-export const Game = mongoose.model("Game", gameSchema);
+export const TestGame = mongoose.model("TestGame", gameSchema);
 
 export const createGame = async () => {
   try {
-    await new Game(gameTestData).save();
+    await new TestGame(gameTestData).save();
   } catch (error) {
     console.log(error);
   }

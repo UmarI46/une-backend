@@ -3,9 +3,9 @@ import { createGame } from "../controllers/gameController.js";
 
 const router = express.Router();
 
-router.post("/games", createGame);
+router.post("/createGame", createGame);
 
-export default router;
+export { router };
 
 // router.get('/songs', songController.getAllSongs);
 // router.post('/songs', songController.createSong);
