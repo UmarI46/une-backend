@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { gameTestData } from "../game";
+import { gameTestData } from "../game.js";
 
 export const gameSchema = new mongoose.Schema({
   players: { type: Object },
@@ -10,11 +10,11 @@ export const gameSchema = new mongoose.Schema({
   gameState: { type: Number },
 });
 
-export const Game = mongoose.model("Game", gameSchema);
+export const TestGame = mongoose.model("TestGame", gameSchema);
 
-export const createGame = async () => {
+export const createTestGame = async () => {
   try {
-    await new Game(gameTestData).save();
+    await new TestGame(gameTestData).save();
   } catch (error) {
     console.log(error);
   }
