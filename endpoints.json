@@ -1,0 +1,11 @@
+{
+  "GET /api": {
+    "description": "serves up a json representation of all the available endpoints of the api"
+  },
+  "POST /api/createGame": {
+    "description": "serves an id for a new game, created on the database",
+    "exampleResponse": {
+      "_id": [{"id": "id"}]
+    }
+  }
+}

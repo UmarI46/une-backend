@@ -1,9 +1,16 @@
 import express from "express";
-import { createGame } from "../controllers/gameController.js";
+import { createGame, getAllGames } from "../controllers/gameController.js";
+import { createRequire } from "module";
+const require = createRequire(import.meta.url);
+const endpoints = require("../endpoints.json");
 
 const router = express.Router();
 
+router.get("/games", getAllGames);
 router.post("/createGame", createGame);
+router.get("/", (request, response) => {
+  response.status(200).send({ endpoints });
+});
 
 export { router };
 

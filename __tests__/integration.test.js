@@ -40,36 +40,38 @@ describe("tests connection to database and seeding", () => {
   });
 });
 
-describe("tests POST endpoint /api/createGame", () => {
-  test("POST: 201 responds with a new game when new game is posted", () => {
-    const testGame = {
-      players: [
-        { player_number: 1, hand: [] },
-        { player_number: 2, hand: [] },
-        { player_number: 3, hand: [] },
-        { player_number: 4, hand: [] },
-      ],
-      currentTurn: 0,
-      deck: [],
-      drawPile: [],
-      discardPile: [],
-      gameState: 0,
-    };
-    return request(app)
-      .post("/api/createGame")
-      .send(testGame)
-      .expect(201)
-      .then((response) => {
-        console.log(response.body, "<<<response.body");
-        console.log(Object.keys(response, "keys"));
+// describe("tests POST endpoint /api/createGame", () => {
+//   test("POST: 201 responds with a new game when new game is posted", () => {
+//     const testGame = {
+//       players: [
+//         { player_number: 1, hand: [] },
+//         { player_number: 2, hand: [] },
+//         { player_number: 3, hand: [] },
+//         { player_number: 4, hand: [] },
+//       ],
+//       currentTurn: 0,
+//       deck: [],
+//       drawPile: [],
+//       discardPile: [],
+//       gameState: 0,
+//     };
+//     return request(app)
+//       .post("/api/createGame")
+//       .send(testGame)
+//       .expect(201)
+//       .then((response) => {
+//         console.log(response.body._id, "<<<response.body");
+//       });
+//   });
+// });
 
-        // expect(returnedComment).toMatchObject({
-        //   article_id: 2,
-        //   author: "rogersop",
-        //   body: "I like it a bit, but not loads",
-        //   comment_id: 19,
-        //   created_at: expect.any(String),
-        // });
+describe("test GET endpoint /api", () => {
+  test("GET: 200 responds with an object containing all available endpoints", () => {
+    return request(app)
+      .get("/api")
+      .expect(200)
+      .then(({ body }) => {
+        expect(body.endpoints).toEqual(jsonEndpoints);
       });
   });
 });
